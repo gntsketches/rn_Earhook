@@ -1,0 +1,5 @@
+https://reactnative.dev/docs/native-modules-android
+
+https://developer.android.com/guide/topics/media/mediaplayer
+
+https://medium.com/@nabehide/how-to-make-the-piano-in-react-native-c8baba1d2917
