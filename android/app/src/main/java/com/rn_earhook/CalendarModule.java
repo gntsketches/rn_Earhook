@@ -11,10 +11,12 @@ import java.util.HashMap;
 import android.util.Log;
 import android.content.Context; // hmm
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 
 
 public class CalendarModule extends ReactContextBaseJavaModule {
 
+    private SoundPool soundPool;
     Context context; // hmm
 
     CalendarModule(ReactApplicationContext context) {
@@ -35,7 +37,7 @@ public class CalendarModule extends ReactContextBaseJavaModule {
 
 //        MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.sound_file_1);
         // where do you get your context?
-        MediaPlayer mediaPlayer = MediaPlayer.create(this.context, R.raw.piano1_c4);
+        MediaPlayer mediaPlayer = MediaPlayer.create(this.context.getApplicationContext(), R.raw.piano1_c4);
         mediaPlayer.start(); // no need to call prepare(); create() does that for you
     }
 }

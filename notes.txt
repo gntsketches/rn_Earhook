@@ -3,3 +3,14 @@ https://reactnative.dev/docs/native-modules-android
 https://developer.android.com/guide/topics/media/mediaplayer
 
 https://medium.com/@nabehide/how-to-make-the-piano-in-react-native-c8baba1d2917
+
+https://eslint.org/docs/user-guide/configuring/
+
+https://reactnative.dev/docs/safeareaview
+
+
+Get context:
+https://github.com/facebook/react-native/issues/3895
+    You can just call the method getApplicationContext on the context that's passed to the constructor of the module, e.g. -
+
+    mReactContext.getApplicationContext();
