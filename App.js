@@ -17,19 +17,19 @@ import {
   View,
 } from 'react-native';
 
-import NewModuleButton from './NewModuleButton';
+import NewModuleButton from './components/NewModuleButton';
+import Piano1 from './components/Piano1'
+
 
 const App: () => Node = () => {
   return (
     <SafeAreaView style={{}}>
       <NewModuleButton />
       <StatusBar />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={{}}
-      >
+      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
         <View>
           <Text>Test</Text>
+          <Piano1 />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -37,7 +37,6 @@ const App: () => Node = () => {
 };
 
 const styles = StyleSheet.create({
-
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,

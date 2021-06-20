@@ -14,3 +14,7 @@ https://github.com/facebook/react-native/issues/3895
     You can just call the method getApplicationContext on the context that's passed to the constructor of the module, e.g. -
 
     mReactContext.getApplicationContext();
+
+
+PIANO CSS
+    https://github.com/nabehide/react-native-piano-example/blob/master/App.js
