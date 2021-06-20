@@ -29,7 +29,7 @@ const App: () => Node = () => {
         style={{}}
       >
         <View>
-          <Text>Testing</Text>
+          <Text>Test</Text>
         </View>
       </ScrollView>
     </SafeAreaView>
