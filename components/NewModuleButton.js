@@ -6,7 +6,7 @@ const NewModuleButton = () => {
 
   const onPress = () => {
     console.log('We will invoke the native module here!');
-    AudioModule.playPitch('C4');
+    AudioModule.playPitch('C3');
   };
 
   return (

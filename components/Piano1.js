@@ -1,9 +1,10 @@
 import React from 'react';
 import {
+  NativeModule, NativeModules,
   StyleSheet,
   Text,
   View,
-} from 'react-native';
+} from "react-native";
 
 // import Sound from 'react-native-sound';
 
@@ -40,6 +41,8 @@ export default class Piano extends React.Component {
     });
   }
   stroke ( note ) {
+    const {AudioModule} = NativeModules;
+
     // change backgroundColor
     switch ( note ) {
       case "C":
@@ -90,6 +93,8 @@ export default class Piano extends React.Component {
     //     }
     //   });
     // }, 1);
+
+    AudioModule.playPitch(note);
   }
   stop( note ) {
 
@@ -150,7 +155,8 @@ export default class Piano extends React.Component {
           <View style={{ flexDirection : "row", alignItems: "center", justifyContent: "center" }}>
 
             <View
-              style={{ backgroundColor: "white", height: 100, width: 32, borderLeftWidth: 1, borderTopWidth: 1,}} >
+              // style={{ backgroundColor: "transparent", height: 100, width: 32, borderLeftWidth: 1, borderTopWidth: 1,}} >
+              style={{ height: 100, width: 32, borderLeftWidth: 1, borderTopWidth: 1,}} >
             </View >
             <View
               onTouchStart={() => this.stroke("Cs")}

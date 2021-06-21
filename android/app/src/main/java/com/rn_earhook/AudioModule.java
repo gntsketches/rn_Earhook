@@ -19,7 +19,7 @@ import android.media.SoundPool;
 
 public class AudioModule extends ReactContextBaseJavaModule {
 
-    private int C4; //, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, C4;
+    private int C3, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, C4;
     private SoundPool soundPool;
     Context context; // hmm
 
@@ -45,6 +45,18 @@ public class AudioModule extends ReactContextBaseJavaModule {
             soundPool = new SoundPool(6, AudioManager.STREAM_MUSIC, 0); // maxStream is how many sounds you can play at the same time. "Stream Type" defines behavior. "srcQuality" was never implemented // STREAM_MUSIC means to play through the connected device
         }
 
+        C3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_c3, 1);
+        Db3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_db3, 1);
+        D3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_d3, 1);
+        Eb3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_eb3, 1);
+        E3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_e3, 1);
+        F3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_f3, 1);
+        Gb3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_gb3, 1);
+        G3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_g3, 1);
+        Ab3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_ab3, 1);
+        A3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_a3, 1);
+        Bb3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_bb3, 1);
+        B3 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_b3, 1);
         C4 = soundPool.load(this.context.getApplicationContext(), R.raw.piano1_c4, 1);
     }
 
@@ -57,6 +69,46 @@ public class AudioModule extends ReactContextBaseJavaModule {
     public void playPitch(String pitch) {
         Log.d("AudioModule", ">>>Play pitch: " + pitch);
 
-        soundPool.play(C4, 1, 1, 0, 0, 1);
+        switch (pitch) {
+            case "C":
+                soundPool.play(C3, 1, 1, 0, 0, 1);
+                break;
+            case "Cs":
+                soundPool.play(Db3, 1, 1, 0, 0, 1);
+                break;
+            case "D":
+                soundPool.play(D3, 1, 1, 0, 0, 1);
+                break;
+            case "Ds":
+                soundPool.play(Eb3, 1, 1, 0, 0, 1);
+                break;
+            case "E":
+                soundPool.play(E3, 1, 1, 0, 0, 1);
+                break;
+            case "F":
+                soundPool.play(F3, 1, 1, 0, 0, 1);
+                break;
+            case "Fs":
+                soundPool.play(Gb3, 1, 1, 0, 0, 1);
+                break;
+            case "G":
+                soundPool.play(G3, 1, 1, 0, 0, 1);
+                break;
+            case "Gs":
+                soundPool.play(Ab3, 1, 1, 0, 0, 1);
+                break;
+            case "A":
+                soundPool.play(A3, 1, 1, 0, 0, 1);
+                break;
+            case "As":
+                soundPool.play(Bb3, 1, 1, 0, 0, 1);
+                break;
+            case "B":
+                soundPool.play(B3, 1, 1, 0, 0, 1);
+                break;
+            case "C8":
+                soundPool.play(C4, 1, 0, 0, 0, 1);
+                break;
+        }
     }
 }
