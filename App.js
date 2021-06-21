@@ -11,7 +11,6 @@ import type {Node} from 'react';
 import {
   SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
   View,
@@ -23,7 +22,6 @@ import Piano1 from './components/Piano1'
 const App: () => Node = () => {
   return (
     <SafeAreaView style={{}}>
-      <StatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
         <View>
           <Text>Test</Text>
