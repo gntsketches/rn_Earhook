@@ -17,13 +17,13 @@ import android.media.MediaPlayer;
 import android.media.SoundPool;
 
 
-public class CalendarModule extends ReactContextBaseJavaModule {
+public class AudioModule extends ReactContextBaseJavaModule {
 
     private int C4; //, Db3, D3, Eb3, E3, F3, Gb3, G3, Ab3, A3, Bb3, B3, C4;
     private SoundPool soundPool;
     Context context; // hmm
 
-    CalendarModule(ReactApplicationContext context) {
+    AudioModule(ReactApplicationContext context) {
         super(context);
 
         this.context = context; // hmm
@@ -50,12 +50,12 @@ public class CalendarModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "CalendarModule";
+        return "AudioModule";
     }
 
     @ReactMethod
-    public void createCalendarEvent(String pitch) {
-        Log.d("CalendarModule", ">>>Play pitch: " + pitch);
+    public void playPitch(String pitch) {
+        Log.d("AudioModule", ">>>Play pitch: " + pitch);
 
         soundPool.play(C4, 1, 1, 0, 0, 1);
     }

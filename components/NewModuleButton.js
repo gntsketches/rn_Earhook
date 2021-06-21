@@ -2,11 +2,11 @@ import React from 'react';
 import {NativeModules, Button} from 'react-native';
 
 const NewModuleButton = () => {
-  const {CalendarModule} = NativeModules;
+  const {AudioModule} = NativeModules;
 
   const onPress = () => {
     console.log('We will invoke the native module here!');
-    CalendarModule.createCalendarEvent('C4');
+    AudioModule.playPitch('C4');
   };
 
   return (
