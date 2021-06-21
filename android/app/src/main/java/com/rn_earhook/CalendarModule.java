@@ -54,17 +54,8 @@ public class CalendarModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createCalendarEvent(String name, String location) {
-        Log.d("CalendarModule", "Create event called with name: " + name
-                + " and location: " + location);
-
-//        MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.sound_file_1);
-        // where do you get your context?
-//        MediaPlayer mediaPlayer = MediaPlayer.create(this.context.getApplicationContext(), R.raw.piano1_c4);
-//        mediaPlayer.start(); // no need to call prepare(); create() does that for you
-
-
-
+    public void createCalendarEvent(String pitch) {
+        Log.d("CalendarModule", ">>>Play pitch: " + pitch);
 
         soundPool.play(C4, 1, 1, 0, 0, 1);
     }
