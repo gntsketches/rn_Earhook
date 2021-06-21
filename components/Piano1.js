@@ -155,7 +155,7 @@ export default class Piano extends React.Component {
           <View style={{ flexDirection : "row", alignItems: "center", justifyContent: "center" }}>
 
             <View
-              // style={{ backgroundColor: "transparent", height: 100, width: 32, borderLeftWidth: 1, borderTopWidth: 1,}} >
+              // style={{ backgroundColor: "white", height: 100, width: 32, borderLeftWidth: 1, borderTopWidth: 1,}} >
               style={{ height: 100, width: 32, borderLeftWidth: 1, borderTopWidth: 1,}} >
             </View >
             <View

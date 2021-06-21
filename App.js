@@ -17,14 +17,12 @@ import {
   View,
 } from 'react-native';
 
-import NewModuleButton from './components/NewModuleButton';
 import Piano1 from './components/Piano1'
 
 
 const App: () => Node = () => {
   return (
     <SafeAreaView style={{}}>
-      <NewModuleButton />
       <StatusBar />
       <ScrollView contentInsetAdjustmentBehavior="automatic" style={{}}>
         <View>
