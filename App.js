@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 import {
   SafeAreaView,
   ScrollView,
@@ -9,11 +10,19 @@ import {
   View,
 } from 'react-native';
 
+import Play from './screens/Play'
+import Menu from './screens/Menu'
 import Piano1 from './components/Piano1'
+
+const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
+      <Stack.Navigator initialRouteName="Play">
+        <Stack.Screen name="Play" component={Play} />
+        <Stack.Screen name="Menu" component={Menu} />
+      </Stack.Navigator>
       <View>
         <Text>Hello</Text>
       </View>
