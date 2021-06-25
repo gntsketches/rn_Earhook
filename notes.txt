@@ -24,3 +24,17 @@ PIANO CSS
 
 NAV
     https://reactnavigation.org/docs/getting-started/
+
+SHARE STATE
+    Uses Nav3 tho:
+        https://benjaminwfox.medium.com/share-state-between-screens-with-custom-navigators-in-react-navigation-62a34e3c7f97
+    https://stackoverflow.com/questions/51139806/how-do-i-share-state-between-react-native-screens
+    https://www.reddit.com/r/reactnative/comments/o7pc0h/pass_state_to_navigator_screens_without_redux/
+
+    CONTEXT:
+        https://stackoverflow.com/questions/51187582/how-should-the-new-context-api-work-with-react-native-navigator
+        https://dev.to/emeka/state-management-in-react-native-using-context-14no
+        https://medium.com/swlh/localization-with-react-navigation-4-and-the-context-api-c75778816041
+
+    CONTEXT WITH REACT-NATIVE-NAVIGATION
+        https://wix.github.io/react-native-navigation/docs/third-party-react-context/

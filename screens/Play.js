@@ -7,7 +7,7 @@ const Play = (props) => {
   const { route, navigation } = props;
 
   const { params } = route;
-  const { info } = params;
+  const { state } = params;
   console.log('params', params);
   // const info = params ? params.info : 'nope'
 
@@ -15,16 +15,16 @@ const Play = (props) => {
   return (
     <View>
       <Text>Play</Text>
-      <Text>{info}</Text>
+      <Text>Playing: {state.playing.toString()}</Text>
+      <Button
+        title="Start"
+        onPress={() => params.startStop()}
+      />
       <Button
         title="Menu"
         onPress={() => props.navigation.navigate('Menu', {
           info: 'test',
         })}
-      />
-      <Button
-        title="App Log Test"
-        onPress={() => params.appLogTest()}
       />
     </View>
   );

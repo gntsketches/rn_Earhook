@@ -17,12 +17,20 @@ import Piano1 from './components/Piano1'
 const Stack = createStackNavigator();
 
 class App extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
 
-  appLogTest = () => {
-    console.log('appLogTest!');
+    this.state = {
+      info: 'state test',
+      playing: false,
+    }
+  }
+
+  startStop = () => {
+    console.log('starting! or stopping');
+    this.setState({
+      playing: !this.state.playing,
+    })
   }
 
   render() {
@@ -39,8 +47,8 @@ class App extends React.Component {
             name="Play"
             component={Play}
             initialParams={{
-              info: 'blank',
-              appLogTest: this.appLogTest,
+              state: this.state,
+              startStop: this.startStop,
             }}
           />
           <Stack.Screen name="Menu" component={Menu} />
