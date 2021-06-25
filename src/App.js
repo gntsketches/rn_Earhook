@@ -13,7 +13,6 @@ import {
 import { GlobalContextProvider } from "./GlobalContext";
 import Play from './screens/Play'
 import Menu from './screens/Menu'
-import Piano1 from './components/Piano1'
 
 const Stack = createStackNavigator();
 

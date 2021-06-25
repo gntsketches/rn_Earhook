@@ -1,7 +1,8 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, Button, ScrollView } from "react-native";
 
 import { withGlobalContext } from '../GlobalContext';
+import Piano1 from '../components/Piano1'
 
 
 const Play = (props) => {
@@ -16,6 +17,9 @@ const Play = (props) => {
     <View>
       <Text>Play</Text>
       <Text>Playing: {props.global.playing.toString()}</Text>
+      <ScrollView>
+        <Piano1 />
+      </ScrollView>
       <Button
         title="Playing"
         onPress={() => props.global.togglePlaying()}

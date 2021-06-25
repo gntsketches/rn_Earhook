@@ -41,6 +41,7 @@ export default class Piano extends React.Component {
     });
   }
   stroke ( note ) {
+    console.log('in stroke function');
     const {AudioModule} = NativeModules;
 
     // change backgroundColor
