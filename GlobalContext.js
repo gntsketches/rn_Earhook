@@ -4,19 +4,11 @@ const GlobalContext = React.createContext({});
 
 export class GlobalContextProvider extends React.Component {
   state = {
-    isOnline: true
+    playing: true
   }
 
-  switchToOnline = () => {
-    this.setState({ isOnline: true });
-  }
-
-  switchToOffline = () => {
-    this.setState({ isOnline: false });
-  }
-
-  toggleOnline = () => {
-    this.setState({ isOnline: !this.state.isOnline });
+  togglePlaying = () => {
+    this.setState({ playing: !this.state.playing });
   }
 
   render () {
@@ -24,9 +16,7 @@ export class GlobalContextProvider extends React.Component {
       <GlobalContext.Provider
         value={{
           ...this.state,
-          switchToOnline: this.switchToOnline,
-          switchToOffline: this.switchToOffline,
-          toggleOnline: this.toggleOnline,
+          togglePlaying: this.togglePlaying,
         }}
       >
         {this.props.children}

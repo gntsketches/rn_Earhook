@@ -18,11 +18,10 @@ const Play = (props) => {
   return (
     <View>
       <Text>Play</Text>
-      <Text>Playing: {state.playing.toString()}</Text>
-      <Text>Is online: {props.global.isOnline.toString()}</Text>
+      <Text>Playing: {props.global.playing.toString()}</Text>
       <Button
-        title="Online"
-        onPress={() => props.global.toggleOnline()}
+        title="Playing"
+        onPress={() => props.global.togglePlaying()}
       />
       <Button
         title="Menu"
