@@ -16,30 +16,41 @@ import Piano1 from './components/Piano1'
 
 const Stack = createStackNavigator();
 
-const App = () => {
+class App extends React.Component {
+  // constructor(props) {
+  //   super(props);
+  // }
 
-  const appLogTest = () => {
+  appLogTest = () => {
     console.log('appLogTest!');
   }
 
-  return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Play">
-        <Stack.Screen
-          name="Play"
-          component={Play}
-          initialParams={{
-            info: 'blank',
-            appLogTest,
+  render() {
+
+    return (
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="Play"
+          screenOptions={{
+            headerShown: false,
           }}
-        />
-        <Stack.Screen name="Menu" component={Menu} />
-      </Stack.Navigator>
-      <View>
-        <Text>Hello, you can also have views alongside the Stack.Navigator, wonder if the text will wrap? Well it does.</Text>
-      </View>
-    </NavigationContainer>
-  )
+        >
+          <Stack.Screen
+            name="Play"
+            component={Play}
+            initialParams={{
+              info: 'blank',
+              appLogTest: this.appLogTest,
+            }}
+          />
+          <Stack.Screen name="Menu" component={Menu} />
+        </Stack.Navigator>
+        <View>
+          <Text>Hello, you can also have views alongside the Stack.Navigator, wonder if the text will wrap? Well it does.</Text>
+        </View>
+      </NavigationContainer>
+    )
+  }
 }
 
 export default App;
