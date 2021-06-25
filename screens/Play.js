@@ -1,6 +1,9 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
 
+import { withGlobalContext } from '../GlobalContext';
+
+
 const Play = (props) => {
   console.log('Play props', props);
 
@@ -16,9 +19,10 @@ const Play = (props) => {
     <View>
       <Text>Play</Text>
       <Text>Playing: {state.playing.toString()}</Text>
+      <Text>Is online: {props.global.isOnline.toString()}</Text>
       <Button
-        title="Start"
-        onPress={() => params.startStop()}
+        title="Online"
+        onPress={() => props.global.toggleOnline()}
       />
       <Button
         title="Menu"
@@ -30,4 +34,4 @@ const Play = (props) => {
   );
 };
 
-export default Play;
+export default withGlobalContext(Play);

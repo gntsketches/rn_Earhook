@@ -10,6 +10,7 @@ import {
   View,
 } from 'react-native';
 
+import { GlobalContextProvider } from "./GlobalContext";
 import Play from './screens/Play'
 import Menu from './screens/Menu'
 import Piano1 from './components/Piano1'
@@ -36,27 +37,29 @@ class App extends React.Component {
   render() {
 
     return (
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Play"
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen
-            name="Play"
-            component={Play}
-            initialParams={{
-              state: this.state,
-              startStop: this.startStop,
+      <GlobalContextProvider>
+        <NavigationContainer>
+            <Stack.Navigator
+            initialRouteName="Play"
+            screenOptions={{
+              headerShown: false,
             }}
-          />
-          <Stack.Screen name="Menu" component={Menu} />
-        </Stack.Navigator>
-        <View>
-          <Text>Hello, you can also have views alongside the Stack.Navigator, wonder if the text will wrap? Well it does.</Text>
-        </View>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="Play"
+              component={Play}
+              initialParams={{
+                state: this.state,
+                startStop: this.startStop,
+              }}
+            />
+            <Stack.Screen name="Menu" component={Menu} />
+          </Stack.Navigator>
+          <View>
+            <Text>Hello, you can also have views alongside the Stack.Navigator, wonder if the text will wrap? Well it does.</Text>
+          </View>
+        </NavigationContainer>
+      </GlobalContextProvider>
     )
   }
 }
