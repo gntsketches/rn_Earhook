@@ -12,6 +12,7 @@ const Play = (props) => {
   const { params } = route;
   console.log('params.info:', params.info);
 
+  const startStopText = props.global.playing ? 'Stop' : 'Start'
 
   return (
     <View>
@@ -21,7 +22,7 @@ const Play = (props) => {
         <Piano1 />
       </ScrollView>
       <Button
-        title="Playing"
+        title={startStopText}
         onPress={() => props.global.togglePlaying()}
       />
       <Button

@@ -4,7 +4,7 @@ const GlobalContext = React.createContext({});
 
 export class GlobalContextProvider extends React.Component {
   state = {
-    playing: true
+    playing: false,
   }
 
   togglePlaying = () => {
