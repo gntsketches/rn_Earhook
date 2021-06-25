@@ -17,14 +17,26 @@ import Piano1 from './components/Piano1'
 const Stack = createStackNavigator();
 
 const App = () => {
+
+  const appLogTest = () => {
+    console.log('appLogTest!');
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="Play">
-        <Stack.Screen name="Play" component={Play} />
+        <Stack.Screen
+          name="Play"
+          component={Play}
+          initialParams={{
+            info: 'blank',
+            appLogTest,
+          }}
+        />
         <Stack.Screen name="Menu" component={Menu} />
       </Stack.Navigator>
       <View>
-        <Text>Hello</Text>
+        <Text>Hello, you can also have views alongside the Stack.Navigator, wonder if the text will wrap? Well it does.</Text>
       </View>
     </NavigationContainer>
   )
