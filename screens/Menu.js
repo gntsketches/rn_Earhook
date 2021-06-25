@@ -3,6 +3,7 @@ import { Text, View, Button } from 'react-native';
 
 const Menu = ({route, navigation}) => {
   const { info } = route.params;
+  console.log('route.params.info:', info);
 
   return (
     <View>
@@ -12,7 +13,7 @@ const Menu = ({route, navigation}) => {
         title="Play"
         // onPress={() => navigation.goBack()}
         onPress={() => navigation.navigate('Play', {
-          info: 'back from Menu',
+          info: 'params from Menu',
         })}
       />
     </View>

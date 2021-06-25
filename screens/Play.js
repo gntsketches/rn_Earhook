@@ -8,11 +8,8 @@ const Play = (props) => {
   console.log('Play props', props);
 
   const { route, navigation } = props;
-
   const { params } = route;
-  const { state } = params;
-  console.log('params', params);
-  // const info = params ? params.info : 'nope'
+  console.log('params.info:', params.info);
 
 
   return (
@@ -26,7 +23,7 @@ const Play = (props) => {
       <Button
         title="Menu"
         onPress={() => props.navigation.navigate('Menu', {
-          info: 'test',
+          info: 'params from Play',
         })}
       />
     </View>

@@ -39,7 +39,7 @@ class App extends React.Component {
     return (
       <GlobalContextProvider>
         <NavigationContainer>
-            <Stack.Navigator
+          <Stack.Navigator
             initialRouteName="Play"
             screenOptions={{
               headerShown: false,
@@ -49,8 +49,7 @@ class App extends React.Component {
               name="Play"
               component={Play}
               initialParams={{
-                state: this.state,
-                startStop: this.startStop,
+                info: 'initialParams info'
               }}
             />
             <Stack.Screen name="Menu" component={Menu} />
