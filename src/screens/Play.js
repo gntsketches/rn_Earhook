@@ -15,11 +15,13 @@ const Play = (props) => {
   console.log('params.info:', params.info);
 
   const startStopText = props.global.playing ? 'Stop' : 'Start'
+  const timestamp = props.global.timestamp
 
   return (
     <View style={styles.main}>
       <Text>Play</Text>
       <Text>Playing: {props.global.playing.toString()}</Text>
+      <Text>Timestamp: {timestamp}</Text>
       {/*<ScrollView>*/}
       {/*  <Piano1 />*/}
       {/*</ScrollView>*/}
@@ -51,7 +53,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   footer: {
-    display: "flex",
+    // display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
   },
