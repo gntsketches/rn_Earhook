@@ -15,6 +15,8 @@ https://github.com/facebook/react-native/issues/3895
 
     mReactContext.getApplicationContext();
 
+GENERAL CSS
+    TouchableOpacity vs Button
 
 PIANO CSS
     https://github.com/nabehide/react-native-piano-example/blob/master/App.js

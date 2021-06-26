@@ -53,9 +53,9 @@ class App extends React.Component {
             />
             <Stack.Screen name="Menu" component={Menu} />
           </Stack.Navigator>
-          <View>
-            <Text>Hello, you can also have views alongside the Stack.Navigator, wonder if the text will wrap? Well it does.</Text>
-          </View>
+          {/*<View>*/}
+          {/*  <Text>Hello, you can also have views alongside the Stack.Navigator, wonder if the text will wrap? Well it does.</Text>*/}
+          {/*</View>*/}
         </NavigationContainer>
       </GlobalContextProvider>
     )
