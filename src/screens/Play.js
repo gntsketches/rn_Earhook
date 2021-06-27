@@ -18,7 +18,7 @@ const Play = (props) => {
 
   return (
     <View style={styles.main}>
-      <Text>Play</Text>
+      <Text>Play Screen</Text>
       <Text>Playing: {props.global.playing.toString()}</Text>
       <Text>Timestamp: {timestamp}</Text>
       {/*<ScrollView>*/}
