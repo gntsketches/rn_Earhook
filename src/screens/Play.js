@@ -4,7 +4,6 @@ import { Text, View, Button, ScrollView, StyleSheet, Pressable } from "react-nat
 
 import { withGlobalContext } from '../GlobalContext';
 import Piano1 from '../components/Piano1'
-import { green } from "react-native-reanimated/src/reanimated2/Colors";
 
 
 const Play = (props) => {
