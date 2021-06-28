@@ -4,6 +4,7 @@ import { Text, View, Button, ScrollView, StyleSheet, Pressable } from "react-nat
 
 import { withGlobalContext } from '../GlobalContext';
 import Piano1 from '../components/Piano1'
+import Piano from '../components/Piano'
 
 
 const Play = (props) => {
@@ -21,6 +22,7 @@ const Play = (props) => {
       <Text>Play Screen</Text>
       <Text>Playing: {props.global.playing.toString()}</Text>
       <Text>Timestamp: {timestamp}</Text>
+      <Piano />
       {/*<ScrollView>*/}
       {/*  <Piano1 />*/}
       {/*</ScrollView>*/}
