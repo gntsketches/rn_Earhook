@@ -8,11 +8,11 @@ import Piano from '../components/Piano'
 
 
 const Play = (props) => {
-  console.log('Play props', props);
+  // console.log('Play props', props);
 
   const { route, navigation } = props;
   const { params } = route;
-  console.log('params.info:', params.info);
+  // console.log('params.info:', params.info);
 
   const startStopText = props.global.playing ? 'Stop' : 'Start'
   const timestamp = props.global.timestamp

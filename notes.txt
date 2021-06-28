@@ -10,10 +10,10 @@ https://reactnative.dev/docs/safeareaview
 
 
 TODO NEXT
-    requestAnimationFrame
+    basic call & response
+    did you read enough of these?
         https://medium.com/source-true/animate-react-component-with-configurable-frame-rate-6e916572d0af
         https://css-tricks.com/using-requestanimationframe-with-react-hooks/
-
         https://reactnative.dev/docs/performance
         https://www.freecodecamp.org/news/how-react-native-animations-work/
 
