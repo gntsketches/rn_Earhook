@@ -1,5 +1,9 @@
 import React from 'react';
+import {
+  NativeModule, NativeModules,
+} from 'react-native'
 
+const {AudioModule} = NativeModules;
 const GlobalContext = React.createContext({});
 
 
@@ -24,13 +28,12 @@ HashMap<String, Mode> modesMap = new HashMap<String, Mode>(){};
 */
 export class GlobalContextProvider extends React.Component {
   state = {
-    playing: false,
+    playing: false, // started: false,
     animationFrame: null,
     startTime: '',
     timestamp: '',
+    noteCalledTime: 0,
     // maxWaitTime: 4000,
-    // started: false,
-    // noteCalledTime: 0,
     // noteResponseTime: 0,
     // nextCallTime: 999999999,
     // callCount: 0,
@@ -47,11 +50,13 @@ export class GlobalContextProvider extends React.Component {
     if (!playing) {
       this.setState({
         playing: true,
-        animationFrame: requestAnimationFrame(this.step),
+        animationFrame: requestAnimationFrame(this.step), // is it necessary to store a reference? better to use a ref?
         startTime: new Date,
       });
+
+      this.sendCall();
     } else {
-      cancelAnimationFrame(this.state.animationFrame)
+      cancelAnimationFrame(this.state.animationFrame) // is it actually necessary to cancelAnimationFrame?
       this.setState({
         playing: false,
         animationFrame: null,
@@ -65,13 +70,24 @@ export class GlobalContextProvider extends React.Component {
     let { playing, startTime } = this.state;
     this.setState({ timestamp: timestamp })
 
-    // const elapsed = timestamp - startTime;
-    // console.log('elapsed', elapsed);
+    // const millis = new Date()
+    // if (millis > nextCallTime) {
+    //   console.log('sending call');
+    //   this.sendCall();
+    // }
 
 
     if (playing) {
-      requestAnimationFrame(this.step);
+      requestAnimationFrame(this.step); // this rAF has no reference...
     }
+  }
+
+  sendCall = () => {
+    this.setState({
+      startTime: new Date()
+    })
+
+    AudioModule.playPitch('C');
   }
 
 
