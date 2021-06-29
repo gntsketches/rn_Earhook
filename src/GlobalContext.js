@@ -50,13 +50,14 @@ export class GlobalContextProvider extends React.Component {
     if (!playing) {
       this.setState({
         playing: true,
-        animationFrame: requestAnimationFrame(this.step), // is it necessary to store a reference? better to use a ref?
+        // animationFrame: requestAnimationFrame(this.step), // is it necessary to store a reference? better to use a ref?
         startTime: Date.now(),
       });
+      requestAnimationFrame(this.step) // is it necessary to store a reference? better to use a ref?
 
-      this.sendCall();
+        this.sendCall();
     } else {
-      cancelAnimationFrame(this.state.animationFrame) // is it actually necessary to cancelAnimationFrame?
+      // cancelAnimationFrame(this.state.animationFrame) // is it actually necessary to cancelAnimationFrame?
       this.setState({
         playing: false,
         animationFrame: null,
@@ -69,11 +70,11 @@ export class GlobalContextProvider extends React.Component {
   step = (timestamp) => {
     // console.log('timestamp', timestamp);
     let { playing, nextCallTime } = this.state;
-    this.setState({ timestamp: timestamp })
+    // this.setState({ timestamp: timestamp })
 
     const now = Date.now()
     if (nextCallTime != null && now >= nextCallTime) {
-      console.log('sending call')
+      // console.log('sending call')
       this.sendCall();
       this.setState({
         nextCallTime: null,
@@ -99,11 +100,11 @@ export class GlobalContextProvider extends React.Component {
 
     // console.log('sendResponse');
     const now = Date.now()
-    console.log('now', now);
+    // console.log('now', now);
     const nextCallInterval = now - callTime
-    console.log('nextCallInterval', nextCallInterval)
+    // console.log('nextCallInterval', nextCallInterval)
     const nextCallTime = now + nextCallInterval
-    console.log('nextCallTime', nextCallTime);
+    // console.log('nextCallTime', nextCallTime);
     this.setState({
       nextCallTime,
     })

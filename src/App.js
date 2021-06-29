@@ -19,19 +19,8 @@ const Stack = createStackNavigator();
 class App extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      info: 'state test',
-      playing: false,
-    }
   }
 
-  startStop = () => {
-    console.log('starting! or stopping');
-    this.setState({
-      playing: !this.state.playing,
-    })
-  }
 
   render() {
 

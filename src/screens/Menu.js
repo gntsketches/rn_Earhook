@@ -3,7 +3,7 @@ import { Text, View, Button } from 'react-native';
 
 const Menu = ({route, navigation}) => {
   const { info } = route.params;
-  console.log('route.params.info:', info);
+  // console.log('route.params.info:', info);
 
   return (
     <View>
