@@ -3,14 +3,17 @@ import {
   NativeModule, NativeModules,
   Text, View, StyleSheet, TouchableOpacity, Pressable
 } from 'react-native'
+import { withGlobalContext } from '../../GlobalContext';
 
-export default class Piano extends React.Component {
+class Piano extends React.Component {
 
   playPitch(note) {
-    console.log('playing note:', note)
+    // console.log('playing note:', note)
     const {AudioModule} = NativeModules;
 
     AudioModule.playPitch(note);
+    this.props.global.sendResponse()
+
   }
 
   render() {
@@ -27,6 +30,8 @@ export default class Piano extends React.Component {
     )
   }
 }
+
+export default withGlobalContext(Piano)
 
 const styles = StyleSheet.create({
   pianoMain: {

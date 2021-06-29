@@ -11,6 +11,8 @@ https://reactnative.dev/docs/safeareaview
 
 TODO NEXT
     basic call & response
+        https://stackoverflow.com/questions/492994/compare-two-dates-with-javascript
+
     did you read enough of these?
         https://medium.com/source-true/animate-react-component-with-configurable-frame-rate-6e916572d0af
         https://css-tricks.com/using-requestanimationframe-with-react-hooks/

@@ -32,10 +32,10 @@ export class GlobalContextProvider extends React.Component {
     animationFrame: null,
     startTime: '',
     timestamp: '',
-    noteCalledTime: 0,
+    callTime: '',
+    responseTime: '', // is that needed?
+    nextCallTime: null,
     // maxWaitTime: 4000,
-    // noteResponseTime: 0,
-    // nextCallTime: 999999999,
     // callCount: 0,
     // callCountLimit: 3,
     // pickNewCallNote: false,
@@ -51,7 +51,7 @@ export class GlobalContextProvider extends React.Component {
       this.setState({
         playing: true,
         animationFrame: requestAnimationFrame(this.step), // is it necessary to store a reference? better to use a ref?
-        startTime: new Date,
+        startTime: Date.now(),
       });
 
       this.sendCall();
@@ -61,20 +61,24 @@ export class GlobalContextProvider extends React.Component {
         playing: false,
         animationFrame: null,
         startTime: '',
+        nextCallTime: null,
       });
     }
   }
 
   step = (timestamp) => {
     // console.log('timestamp', timestamp);
-    let { playing, startTime } = this.state;
+    let { playing, nextCallTime } = this.state;
     this.setState({ timestamp: timestamp })
 
-    // const millis = new Date()
-    // if (millis > nextCallTime) {
-    //   console.log('sending call');
-    //   this.sendCall();
-    // }
+    const now = Date.now()
+    if (nextCallTime != null && now >= nextCallTime) {
+      console.log('sending call')
+      this.sendCall();
+      this.setState({
+        nextCallTime: null,
+      })
+    }
 
 
     if (playing) {
@@ -84,12 +88,26 @@ export class GlobalContextProvider extends React.Component {
 
   sendCall = () => {
     this.setState({
-      startTime: new Date()
+      callTime: Date.now()
     })
 
     AudioModule.playPitch('C');
   }
 
+  sendResponse = () => {
+    const { callTime } = this.state
+
+    // console.log('sendResponse');
+    const now = Date.now()
+    console.log('now', now);
+    const nextCallInterval = now - callTime
+    console.log('nextCallInterval', nextCallInterval)
+    const nextCallTime = now + nextCallInterval
+    console.log('nextCallTime', nextCallTime);
+    this.setState({
+      nextCallTime,
+    })
+  }
 
 
   render () {
@@ -98,6 +116,7 @@ export class GlobalContextProvider extends React.Component {
         value={{
           ...this.state,
           togglePlaying: this.togglePlaying,
+          sendResponse: this.sendResponse,
         }}
       >
         {this.props.children}
