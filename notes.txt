@@ -70,3 +70,7 @@ SHARE STATE
 PATHS: use Aliases, per atlasGO & Tania:
    https://www.taniarascia.com/react-architecture-directory-structure/
    actually how are we doing this?
+
+
+ANIMATION
+   https://stackoverflow.com/questions/54066805/how-to-implement-a-gameloop-with-requestanimationframe-across-multiple-react-red

@@ -22,8 +22,57 @@ class Piano extends React.Component {
         <TouchableOpacity
           onPress={()=> this.playPitch('C')}
         >
-          <View style={styles.generate}>
-            <Text style={{color:'#fff'}}>C</Text>
+          <View style={styles.key}>
+            <Text>C</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> this.playPitch('D')}
+        >
+          <View style={styles.key}>
+            <Text>D</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> this.playPitch('E')}
+        >
+          <View style={styles.key}>
+            <Text>E</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> this.playPitch('F')}
+        >
+          <View style={styles.key}>
+            <Text>F</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> this.playPitch('G')}
+        >
+          <View style={styles.key}>
+            <Text>G</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> this.playPitch('A')}
+        >
+          <View style={styles.key}>
+            <Text>A</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> this.playPitch('B')}
+        >
+          <View style={styles.key}>
+            <Text>B</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={()=> this.playPitch('C8')}
+        >
+          <View style={styles.key}>
+            <Text>C</Text>
           </View>
         </TouchableOpacity>
       </View>
@@ -35,12 +84,19 @@ export default withGlobalContext(Piano)
 
 const styles = StyleSheet.create({
   pianoMain: {
-    backgroundColor: '#888',
+    // backgroundColor: '#888',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingHorizontal: 10,
   },
-  generate: {
-    backgroundColor: '#00bcd4',
+  key: {
+    backgroundColor: '#fff',
+    color: 'black',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: 10,
-    width: '100%',
+    width: 40,
+    height: 100,
   }
 })
