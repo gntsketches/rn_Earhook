@@ -1,4 +1,3 @@
-import { MatcherList } from 'cssom';
 import React from 'react';
 import {
   NativeModule, NativeModules,
@@ -41,16 +40,37 @@ export class GlobalContextProvider extends React.Component {
     // maxWaitTime: 4000,
     // callCount: 0,
     // callCountLimit: 3,
-    // pickNewCallNote: false,
-    // target: '',
     // sameCallCount: 0,
     // sameCallLimit: 2,
     // callWasMatched: false,
+    pickNewCallNote: true,
+    callNote: '',
     mode: 'major',
-
+    
     scoring,
   }
+  
+  get activeNotes() {
+    const { mode, scoring } = this.state
+    const currentModeNotes = modes[mode]
+    const currentModeLevel = scoring[mode].level
+    const activeNotes = currentModeNotes.filter((note, index) => index < currentModeLevel)
+    // console.log('>>>activeNotes', activeNotes);
+    return activeNotes
+  }
 
+  get currentLevel() {
+    const { mode, scoring } = this.state
+    const currentLevel = scoring[mode].level
+    return currentLevel
+  }
+
+  get currentMatchCount() {
+    const { mode, scoring } = this.state
+    const currentLevel = scoring[mode].level
+    return scoring[mode].matchCounts[currentLevel-1]
+  }
+  
   togglePlaying = () => {
     const { playing } = this.state;
     if (!playing) {
@@ -92,45 +112,70 @@ export class GlobalContextProvider extends React.Component {
     }
   }
 
-  pickPitch = () => {
-    const modePitches = this.activeNotes
-    console.log('modePitches');
-    const pitch = modePitches[Math.floor(Math.random() * modePitches.length)]
-    return pitch
+  pickNote = () => {
+    const modeNotes = this.activeNotes
+    // console.log('modeNotes');
+    const note = modeNotes[Math.floor(Math.random() * modeNotes.length)]
+    return note
   }
 
   sendCall = () => {
-    const callPitch = this.pickPitch()
-    console.log('callPitch', callPitch);
+    const { pickNewCallNote } = this.state
+    let { callNote } = this.state
+    if (pickNewCallNote) {
+      callNote = this.pickNote()
+    }
+    // console.log('callNote', callNote);
     this.setState({
-      callTime: Date.now()
+      callTime: Date.now(),
+      callNote,
     })
 
-    AudioModule.playPitch(callPitch);
+    AudioModule.playPitch(callNote);
   }
 
-  sendResponse = () => {
-    const { callTime } = this.state
+  sendResponse = (responseNote) => {
+    const { callNote, callTime, mode, scoring } = this.state
 
-    // console.log('sendResponse');
-    const now = Date.now()
-    // console.log('now', now);
-    const nextCallInterval = now - callTime
-    // console.log('nextCallInterval', nextCallInterval)
-    const nextCallTime = now + nextCallInterval
-    // console.log('nextCallTime', nextCallTime);
+    const now = Date.now() // console.log('now', now);
+    const nextCallInterval = now - callTime // console.log('nextCallInterval', nextCallInterval)
+    const nextCallTime = now + nextCallInterval // console.log('nextCallTime', nextCallTime);
+
+    const newMatchCount = { ...this.currentMatchCount }
+    const newScoring = { ...scoring }
+    let pickNewCallNote = false
+    // console.log('newMatchCount', newMatchCount);
+
+    if (responseNote === callNote) {
+      pickNewCallNote = true
+      newMatchCount.match += 1
+    } else {
+      newMatchCount.miss += 1
+    }
+    newScoring[mode].matchCounts[this.currentLevel-1] = newMatchCount
+
     this.setState({
       nextCallTime,
-    })
+      pickNewCallNote,
+      scoring: newScoring,
+    // })
+    }, console.log('callback scoring', this.state.scoring[mode].matchCounts[this.currentLevel-1]))
   }
 
-  get activeNotes() {
+  // for levels, not used yet:
+  checkForLevelAdvance = () => {
     const { mode, scoring } = this.state
-    const currentModeNotes = modes[mode]
-    const currentModeLevel = scoring[mode].level
-    const activeNotes = currentModeNotes.filter((note, index) => index < currentModeLevel)
-    console.log('>>>activeNotes', activeNotes);
-    return activeNotes
+    const { level, matchCounts } = scoring[mode]
+    const counts = matchCounts[level-1]
+    const { match, miss } = counts
+    const matchToMissRatio = match/miss
+    // console.log('match/miss', matchToMissRatio);
+    if (match > 10 
+      && (miss === 0 || matachToMissRatio > 10)) {
+        const newScoring = { ...scoring }
+        newScoring[mode].level += 1
+        // ?
+      }
   }
 
 

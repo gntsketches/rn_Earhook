@@ -12,7 +12,7 @@ class Piano extends React.Component {
     const {AudioModule} = NativeModules;
 
     AudioModule.playPitch(note);
-    this.props.global.sendResponse()
+    this.props.global.sendResponse(note)
 
   }
 

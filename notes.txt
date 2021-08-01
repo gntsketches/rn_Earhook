@@ -9,6 +9,11 @@ https://eslint.org/docs/user-guide/configuring/
 https://reactnative.dev/docs/safeareaview
 
 
+
+HMM
+    maybe track scoring off of state alltogether, since you've got to serialize & save it every match/miss anyway...
+
+
 TODO NEXT
     basic call & response
         https://stackoverflow.com/questions/492994/compare-two-dates-with-javascript

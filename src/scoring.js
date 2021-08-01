@@ -1,6 +1,6 @@
 const scoring = {
   major: {
-    level: 6,
+    level: 2,
     matchCounts: [
       { miss: 0, match: 0 }, 
       { miss: 0, match: 0 }, 
