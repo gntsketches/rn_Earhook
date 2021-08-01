@@ -1,7 +1,10 @@
+import { MatcherList } from 'cssom';
 import React from 'react';
 import {
   NativeModule, NativeModules,
 } from 'react-native'
+import modes from './modes'
+import scoring from './scoring'
 
 const {AudioModule} = NativeModules;
 const GlobalContext = React.createContext({});
@@ -43,6 +46,9 @@ export class GlobalContextProvider extends React.Component {
     // sameCallCount: 0,
     // sameCallLimit: 2,
     // callWasMatched: false,
+    mode: 'major',
+
+    scoring,
   }
 
   togglePlaying = () => {
@@ -81,18 +87,26 @@ export class GlobalContextProvider extends React.Component {
       })
     }
 
-
     if (playing) {
       requestAnimationFrame(this.step); // this rAF has no reference...
     }
   }
 
+  pickPitch = () => {
+    const modePitches = this.activeNotes
+    console.log('modePitches');
+    const pitch = modePitches[Math.floor(Math.random() * modePitches.length)]
+    return pitch
+  }
+
   sendCall = () => {
+    const callPitch = this.pickPitch()
+    console.log('callPitch', callPitch);
     this.setState({
       callTime: Date.now()
     })
 
-    AudioModule.playPitch('C');
+    AudioModule.playPitch(callPitch);
   }
 
   sendResponse = () => {
@@ -108,6 +122,15 @@ export class GlobalContextProvider extends React.Component {
     this.setState({
       nextCallTime,
     })
+  }
+
+  get activeNotes() {
+    const { mode, scoring } = this.state
+    const currentModeNotes = modes[mode]
+    const currentModeLevel = scoring[mode].level
+    const activeNotes = currentModeNotes.filter((note, index) => index < currentModeLevel)
+    console.log('>>>activeNotes', activeNotes);
+    return activeNotes
   }
 
 
