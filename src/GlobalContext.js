@@ -149,6 +149,9 @@ export class GlobalContextProvider extends React.Component {
     if (responseNote === callNote) {
       pickNewCallNote = true
       newMatchCount.match += 1
+      if (this.checkForLevelAdvance) {
+        newScoring[mode].level += level
+      }
     } else {
       newMatchCount.miss += 1
     }
@@ -163,7 +166,7 @@ export class GlobalContextProvider extends React.Component {
   }
 
   // for levels, not used yet:
-  checkForLevelAdvance = () => {
+  get checkForLevelAdvance() {
     const { mode, scoring } = this.state
     const { level, matchCounts } = scoring[mode]
     const counts = matchCounts[level-1]
@@ -172,10 +175,12 @@ export class GlobalContextProvider extends React.Component {
     // console.log('match/miss', matchToMissRatio);
     if (match > 10 
       && (miss === 0 || matachToMissRatio > 10)) {
-        const newScoring = { ...scoring }
-        newScoring[mode].level += 1
+        return true
+        // const newScoring = { ...scoring }
+        // newScoring[mode].level += 1
         // ?
       }
+    return false
   }
 
 
@@ -186,6 +191,9 @@ export class GlobalContextProvider extends React.Component {
           ...this.state,
           togglePlaying: this.togglePlaying,
           sendResponse: this.sendResponse,
+          activeNotes: this.activeNotes,
+          currentLevel: this.currentLevel,
+          currentMatchCount: this.currentMatchCount,
         }}
       >
         {this.props.children}

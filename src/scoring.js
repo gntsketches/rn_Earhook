@@ -1,5 +1,6 @@
 const scoring = {
   major: {
+    unlocked: true,
     level: 2,
     matchCounts: [
       { miss: 0, match: 0 }, 
@@ -16,6 +17,7 @@ const scoring = {
     ],
   },
   minor: {
+    unlocked: false,
     level: 1,
     matchCounts: [
       { miss: 0, match: 0 }, 
@@ -32,6 +34,7 @@ const scoring = {
     ],
   },
   chromatic: {
+    unlocked: false,
     level: 1,
     matchCounts: [
       { miss: 0, match: 0 }, 

@@ -3,7 +3,8 @@ import { Text, View, Button, ScrollView, StyleSheet, Pressable } from "react-nat
 
 
 import { withGlobalContext } from '../GlobalContext';
-import Piano1 from '../components/Piano1'
+// import Piano1 from '../components/Piano1'
+import ScoreDisplay from '../components/ScoreDisplay'
 import Piano from '../components/Piano'
 
 
@@ -19,8 +20,8 @@ const Play = (props) => {
 
   return (
     <View style={styles.main}>
-      <Text>Play Screen</Text>
-      <Text>Playing: {props.global.playing.toString()}</Text>
+      <ScoreDisplay />
+      <Text>Flair</Text>
       {/*<Text>Timestamp: {timestamp}</Text>*/}
       <Piano />
       {/*<ScrollView>*/}

@@ -6,17 +6,19 @@ import {
 import { withGlobalContext } from '../../GlobalContext';
 
 class Piano extends React.Component {
-
+  
   playPitch(note) {
     // console.log('playing note:', note)
     const {AudioModule} = NativeModules;
-
+    
     AudioModule.playPitch(note);
     this.props.global.sendResponse(note)
-
+    
   }
-
+  
   render() {
+    const { activeNotes } = this.props.global
+
     return (
       <View style={styles.pianoMain}>
         <TouchableOpacity
@@ -98,5 +100,9 @@ const styles = StyleSheet.create({
     padding: 10,
     width: 40,
     height: 100,
-  }
+    opacity: 0.5,
+  },
+  activeKey: {
+    opacity: 1,
+  },
 })
