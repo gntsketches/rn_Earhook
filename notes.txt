@@ -10,6 +10,9 @@ https://reactnative.dev/docs/safeareaview
 
 
 
+https://reactnativecode.com/system-ui-isnt-responding/
+
+
 HMM
     maybe track scoring off of state alltogether, since you've got to serialize & save it every match/miss anyway...
 
