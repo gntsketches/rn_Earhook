@@ -55,7 +55,7 @@ export class GlobalContextProvider extends React.Component {
     const currentModeNotes = modes[mode]
     const currentModeLevel = scoring[mode].level
     const activeNotes = currentModeNotes.filter((note, index) => index < currentModeLevel)
-    console.log('>>>activeNotes', activeNotes);
+    // console.log('>>>activeNotes', activeNotes);
     return activeNotes
   }
 

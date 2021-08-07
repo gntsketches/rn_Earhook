@@ -16,6 +16,12 @@ class ScoreDisplay extends React.Component {
     if (match === 0 && miss === 0) matchMissRatio = 0
     else if (match > 0 && miss === 0) matchMissRatio = 'Perfect'
     else matchMissRatio = Math.round(match/miss * 100) / 100
+    console.log('matchMissRatio', matchMissRatio);
+    let ratioProgressInner 
+    if (matchMissRatio === 0) ratioProgressInner = 0 
+    else if (matchMissRatio === 'Perfect') ratioProgressInner = '100%'
+    else ratioProgressInner = `${matchMissRatio}%`
+    console.log('ratioProgressInner', ratioProgressInner);
 
     return (
       <View style={styles.scoreDisplayMain}>
@@ -29,7 +35,10 @@ class ScoreDisplay extends React.Component {
           </View>
           <View style={styles.matchRatioProgressWrap}>
             <View style={styles.progressOuter}>
-              <View style={styles.progressInner}/>
+              <View style={[
+                styles.progressInner,
+                {width: ratioProgressInner}
+              ]}/>
             </View>
           </View>
         </View>
@@ -71,7 +80,8 @@ const styles = StyleSheet.create({
   },
   progressInner: {
     height: '100%',
-    width: '50%',
+    // width: `50%`,
+    // width: width,
     backgroundColor: 'green',
   },
 })
