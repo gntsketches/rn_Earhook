@@ -55,7 +55,7 @@ export class GlobalContextProvider extends React.Component {
     const currentModeNotes = modes[mode]
     const currentModeLevel = scoring[mode].level
     const activeNotes = currentModeNotes.filter((note, index) => index < currentModeLevel)
-    // console.log('>>>activeNotes', activeNotes);
+    console.log('>>>activeNotes', activeNotes);
     return activeNotes
   }
 
@@ -65,10 +65,10 @@ export class GlobalContextProvider extends React.Component {
     return currentLevel
   }
 
-  get currentMatchCount() {
+  get currentLevelData() {
     const { mode, scoring } = this.state
     const currentLevel = scoring[mode].level
-    return scoring[mode].matchCounts[currentLevel-1]
+    return scoring[mode].levelData[currentLevel-1]
   }
   
   togglePlaying = () => {
@@ -141,45 +141,39 @@ export class GlobalContextProvider extends React.Component {
     const nextCallInterval = now - callTime // console.log('nextCallInterval', nextCallInterval)
     const nextCallTime = now + nextCallInterval // console.log('nextCallTime', nextCallTime);
 
-    const newMatchCount = { ...this.currentMatchCount }
+    const newLevelData = { ...this.currentLevelData }
     const newScoring = { ...scoring }
     let pickNewCallNote = false
-    // console.log('newMatchCount', newMatchCount);
+    // console.log('newLevelData', newLevelData);
 
     if (responseNote === callNote) {
       pickNewCallNote = true
-      newMatchCount.match += 1
-      if (this.checkForLevelAdvance) {
-        newScoring[mode].level += level
+      newLevelData.match += 1
+      if (this.checkForLevelAdvance(newLevelData)) {
+        // unlock next level
+        newScoring[mode].level += 1
       }
     } else {
-      newMatchCount.miss += 1
+      newLevelData.miss += 1
     }
-    newScoring[mode].matchCounts[this.currentLevel-1] = newMatchCount
+    newScoring[mode].levelData[this.currentLevel-1] = newLevelData
 
     this.setState({
       nextCallTime,
       pickNewCallNote,
       scoring: newScoring,
     // })
-    }, console.log('callback scoring', this.state.scoring[mode].matchCounts[this.currentLevel-1]))
+    }, console.log('callback scoring', this.state.scoring[mode].levelData[this.currentLevel-1]))
   }
 
-  // for levels, not used yet:
-  get checkForLevelAdvance() {
-    const { mode, scoring } = this.state
-    const { level, matchCounts } = scoring[mode]
-    const counts = matchCounts[level-1]
-    const { match, miss } = counts
+  checkForLevelAdvance(newLevelData) {
+    const { match, miss } = newLevelData
     const matchToMissRatio = match/miss
-    // console.log('match/miss', matchToMissRatio);
-    if (match > 10 
-      && (miss === 0 || matachToMissRatio > 10)) {
+    console.log('match/miss', matchToMissRatio);
+    if (match >= 10 
+      && (miss === 0 || matchToMissRatio >= 10)) {
         return true
-        // const newScoring = { ...scoring }
-        // newScoring[mode].level += 1
-        // ?
-      }
+    }
     return false
   }
 
@@ -193,7 +187,7 @@ export class GlobalContextProvider extends React.Component {
           sendResponse: this.sendResponse,
           activeNotes: this.activeNotes,
           currentLevel: this.currentLevel,
-          currentMatchCount: this.currentMatchCount,
+          currentLevelData: this.currentLevelData,
         }}
       >
         {this.props.children}
