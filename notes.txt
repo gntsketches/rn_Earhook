@@ -8,8 +8,6 @@ https://reactnativecode.com/system-ui-isnt-responding/
 
 
 TODO NEXT
-    Nan% 
-    Display current mode
     repeat call & timeout
     newNoteMatchesToNextLevel
     

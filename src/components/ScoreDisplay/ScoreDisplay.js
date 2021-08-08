@@ -13,16 +13,18 @@ class ScoreDisplay extends React.Component {
     const { match, miss } = currentLevelData
 
     let matchMissRatio 
-    if (match === 0 && miss === 0) matchMissRatio = 0
-    else if (match > 0 && miss === 0) matchMissRatio = 'Perfect'
-    else matchMissRatio = Math.round(match/miss * 100) / 100
-    // console.log('matchMissRatio', matchMissRatio);
-    let ratioProgressInner = matchMissRatio * 10
-    if (ratioProgressInner === 0) ratioProgressInner = 0 
-    else if (ratioProgressInner === 'Perfect') ratioProgressInner = '100%'
-    else ratioProgressInner = `${ratioProgressInner}%`
-    console.log('ratioProgressInner', ratioProgressInner);
-      //  ??? ratioProgressInner NaN%
+    let ratioProgressInner
+    if (match === 0 && miss === 0) {
+      matchMissRatio = 0
+      ratioProgressInner = 0
+    } else if (match > 0 && miss === 0) {
+      matchMissRatio = 'Perfect'
+      ratioProgressInner = '100%'
+    } else {
+      matchMissRatio = Math.round(match/miss * 100) / 100
+      ratioProgressInner = matchMissRatio * 10
+      ratioProgressInner = `${ratioProgressInner}%`
+    }
 
 
     return (
