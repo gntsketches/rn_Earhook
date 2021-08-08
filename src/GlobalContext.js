@@ -31,24 +31,22 @@ HashMap<String, Mode> modesMap = new HashMap<String, Mode>(){};
 export class GlobalContextProvider extends React.Component {
   state = {
     playing: false, // started: false,
-    animationFrame: null,
+    animationFrame: null, // is a reference to animationFrame needed?
     startTime: '',
     timestamp: '',
     callTime: '',
-    responseTime: '', // is that needed?
+    callNote: null,
     nextCallTime: null,
-    // maxWaitTime: 4000,
-    // callCount: 0,
-    // callCountLimit: 3,
+    callWasMatched: false,
+    maxWaitTime: 4000,
+    callCount: 0,
+    callCountLimit: 3,
+    mode: 'major',
+    scoring,
+    // responseTime: '', // is that needed?
     // sameCallCount: 0,
     // sameCallLimit: 2,
-    // callWasMatched: false,
     // pickNewCallNote: true,
-    callNote: null,
-    callWasMatched: false,
-    mode: 'major',
-    
-    scoring,
   }
   
   get activeNotes() {
@@ -83,7 +81,7 @@ export class GlobalContextProvider extends React.Component {
       });
       requestAnimationFrame(this.step) // is it necessary to store a reference? better to use a ref?
 
-        this.sendCall();
+      this.sendCall();
     } else {
       // cancelAnimationFrame(this.state.animationFrame) // is it actually necessary to cancelAnimationFrame?
       this.setState({
@@ -91,13 +89,17 @@ export class GlobalContextProvider extends React.Component {
         animationFrame: null,
         startTime: '',
         nextCallTime: null,
+        callNote: null,
+        callCount: 0,
+        callWasMatched: false,
+        // any other resets?
       });
     }
   }
 
   step = (timestamp) => {
     // console.log('timestamp', timestamp);
-    let { playing, nextCallTime } = this.state;
+    let { playing, nextCallTime, maxWaitTime } = this.state;
     // this.setState({ timestamp: timestamp })
 
     const now = Date.now()
@@ -105,7 +107,7 @@ export class GlobalContextProvider extends React.Component {
       // console.log('sending call')
       this.sendCall();
       this.setState({
-        nextCallTime: null,
+        nextCallTime: now + maxWaitTime,
       })
     }
 
@@ -123,19 +125,28 @@ export class GlobalContextProvider extends React.Component {
 
   sendCall = () => {
     // const { pickNewCallNote } = this.state
-    const { callWasMatched } = this.state
+    const { callWasMatched, maxWaitTime, callCount, callCountLimit } = this.state
     let { callNote } = this.state
+
+    if (callCount >= callCountLimit) {
+      this.togglePlaying()
+      return
+    }
+
     // if (pickNewCallNote) {
     //   callNote = this.pickNote()
     // }
     if (callWasMatched || callNote == null) {
       callNote = this.pickNote()
     }
-    // console.log('callNote', callNote);
+    const now = Date.now() 
+    const nextCallTime = now + maxWaitTime
     this.setState({
       callTime: Date.now(),
       callNote,
       callWasMatched: false,
+      nextCallTime,
+      callCount: callCount+1,
     })
 
     AudioModule.playPitch(callNote);
@@ -172,6 +183,7 @@ export class GlobalContextProvider extends React.Component {
       pickNewCallNote,
       scoring: newScoring,
       callWasMatched: responseMatchedCall,
+      callCount: 0,
     // })
     }, this.checkForLevelAdvance)
 
