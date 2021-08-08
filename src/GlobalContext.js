@@ -44,7 +44,7 @@ export class GlobalContextProvider extends React.Component {
     // sameCallLimit: 2,
     // callWasMatched: false,
     // pickNewCallNote: true,
-    callNote: 'C',
+    callNote: null,
     callWasMatched: false,
     mode: 'major',
     
@@ -128,7 +128,7 @@ export class GlobalContextProvider extends React.Component {
     // if (pickNewCallNote) {
     //   callNote = this.pickNote()
     // }
-    if (callWasMatched) {
+    if (callWasMatched || callNote == null) {
       callNote = this.pickNote()
     }
     // console.log('callNote', callNote);
@@ -155,17 +155,17 @@ export class GlobalContextProvider extends React.Component {
     let pickNewCallNote = false
     let responseMatchedCall = false
     // console.log('newLevelData', newLevelData);
+
+    if (callWasMatched) return
     
-    // if (!callWasMatched) {
-      if (responseNote === callNote) {
-        responseMatchedCall = true
-        // pickNewCallNote = true
-        newLevelData.match += 1
-      } else {
-        newLevelData.miss += 1
-      }
-      newScoring[mode].levelData[this.currentLevel-1] = newLevelData
-    // }
+    if (responseNote === callNote) {
+      responseMatchedCall = true
+      // pickNewCallNote = true
+      newLevelData.match += 1
+    } else {
+      newLevelData.miss += 1
+    }
+    newScoring[mode].levelData[this.currentLevel-1] = newLevelData
 
     this.setState({
       nextCallTime,

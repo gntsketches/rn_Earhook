@@ -3,7 +3,7 @@ const scoring = {
     unlocked: true,
     level: 1,
     levelData: [
-      { unlocked:false, miss: 0, match: 7 }, 
+      { unlocked:false, miss: 0, match: 0 }, 
       { unlocked:false, miss: 0, match: 0 }, 
       { unlocked:false, miss: 0, match: 0 }, 
       { unlocked:false, miss: 0, match: 0 },

@@ -22,6 +22,8 @@ class ScoreDisplay extends React.Component {
     else if (ratioProgressInner === 'Perfect') ratioProgressInner = '100%'
     else ratioProgressInner = `${ratioProgressInner}%`
     console.log('ratioProgressInner', ratioProgressInner);
+      //  ??? ratioProgressInner NaN%
+
 
     return (
       <View style={styles.scoreDisplayMain}>
