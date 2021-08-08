@@ -13,6 +13,11 @@ https://reactnative.dev/docs/safeareaview
 https://reactnativecode.com/system-ui-isnt-responding/
 
 
+
+do you need both callWasMatched and pickNewCallNote?
+    ie if callWasMatched === true on sendCall, then u should pick a new call note...
+
+
 HMM
     maybe track scoring off of state alltogether, since you've got to serialize & save it every match/miss anyway...
 

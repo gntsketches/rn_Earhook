@@ -43,8 +43,9 @@ export class GlobalContextProvider extends React.Component {
     // sameCallCount: 0,
     // sameCallLimit: 2,
     // callWasMatched: false,
-    pickNewCallNote: true,
-    callNote: '',
+    // pickNewCallNote: true,
+    callNote: 'C',
+    callWasMatched: false,
     mode: 'major',
     
     scoring,
@@ -68,6 +69,7 @@ export class GlobalContextProvider extends React.Component {
   get currentLevelData() {
     const { mode, scoring } = this.state
     const currentLevel = scoring[mode].level
+    // console.log('currentLevel', currentLevel);
     return scoring[mode].levelData[currentLevel-1]
   }
   
@@ -120,59 +122,73 @@ export class GlobalContextProvider extends React.Component {
   }
 
   sendCall = () => {
-    const { pickNewCallNote } = this.state
+    // const { pickNewCallNote } = this.state
+    const { callWasMatched } = this.state
     let { callNote } = this.state
-    if (pickNewCallNote) {
+    // if (pickNewCallNote) {
+    //   callNote = this.pickNote()
+    // }
+    if (callWasMatched) {
       callNote = this.pickNote()
     }
     // console.log('callNote', callNote);
     this.setState({
       callTime: Date.now(),
       callNote,
+      callWasMatched: false,
     })
 
     AudioModule.playPitch(callNote);
   }
 
   sendResponse = (responseNote) => {
-    const { callNote, callTime, mode, scoring } = this.state
+    const { callNote, callTime, mode, scoring, callWasMatched } = this.state
 
     const now = Date.now() // console.log('now', now);
     const nextCallInterval = now - callTime // console.log('nextCallInterval', nextCallInterval)
     const nextCallTime = now + nextCallInterval // console.log('nextCallTime', nextCallTime);
 
     const newLevelData = { ...this.currentLevelData }
+    // console.log('currentLevel', this.currentLevel);
+    // console.log('newLevelData', newLevelData);
     const newScoring = { ...scoring }
     let pickNewCallNote = false
+    let responseMatchedCall = false
     // console.log('newLevelData', newLevelData);
-
-    if (responseNote === callNote) {
-      pickNewCallNote = true
-      newLevelData.match += 1
-      if (this.checkForLevelAdvance(newLevelData)) {
-        // unlock next level
-        newScoring[mode].level += 1
+    
+    // if (!callWasMatched) {
+      if (responseNote === callNote) {
+        responseMatchedCall = true
+        // pickNewCallNote = true
+        newLevelData.match += 1
+      } else {
+        newLevelData.miss += 1
       }
-    } else {
-      newLevelData.miss += 1
-    }
-    newScoring[mode].levelData[this.currentLevel-1] = newLevelData
+      newScoring[mode].levelData[this.currentLevel-1] = newLevelData
+    // }
 
     this.setState({
       nextCallTime,
       pickNewCallNote,
       scoring: newScoring,
+      callWasMatched: responseMatchedCall,
     // })
-    }, console.log('callback scoring', this.state.scoring[mode].levelData[this.currentLevel-1]))
+    }, this.checkForLevelAdvance)
+
   }
 
-  checkForLevelAdvance(newLevelData) {
-    const { match, miss } = newLevelData
+  checkForLevelAdvance() {
+    const { scoring, mode } = this.state
+    const { match, miss } = this.currentLevelData
     const matchToMissRatio = match/miss
-    console.log('match/miss', matchToMissRatio);
+    // console.log('match/miss', matchToMissRatio);
     if (match >= 10 
       && (miss === 0 || matchToMissRatio >= 10)) {
-        return true
+        const newScoring = { ...scoring }
+        newScoring[mode].level += 1
+        this.setState({
+          scoring: newScoring,
+        })
     }
     return false
   }
