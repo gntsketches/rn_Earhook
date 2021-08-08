@@ -17,11 +17,11 @@ class ScoreDisplay extends React.Component {
     else if (match > 0 && miss === 0) matchMissRatio = 'Perfect'
     else matchMissRatio = Math.round(match/miss * 100) / 100
     // console.log('matchMissRatio', matchMissRatio);
-    let ratioProgressInner 
-    if (matchMissRatio === 0) ratioProgressInner = 0 
-    else if (matchMissRatio === 'Perfect') ratioProgressInner = '100%'
-    else ratioProgressInner = `${matchMissRatio}%`
-    // console.log('ratioProgressInner', ratioProgressInner);
+    let ratioProgressInner = matchMissRatio * 10
+    if (ratioProgressInner === 0) ratioProgressInner = 0 
+    else if (ratioProgressInner === 'Perfect') ratioProgressInner = '100%'
+    else ratioProgressInner = `${ratioProgressInner}%`
+    console.log('ratioProgressInner', ratioProgressInner);
 
     return (
       <View style={styles.scoreDisplayMain}>
