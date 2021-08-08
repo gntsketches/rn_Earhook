@@ -29,7 +29,7 @@ class ScoreDisplay extends React.Component {
       <View style={styles.scoreDisplayMain}>
         <View style={styles.scoreDisplayLeft}>
           <View style={styles.scoreDisplayMatchAndMiss}>
-            <Text>Match: {match}</Text>
+            <Text style={styles.scoreDisplayMatchAndMissText}>Match: {match}</Text>
             <Text>Miss: {miss}</Text>
           </View>
           <View style={styles.scoreDisplayMatchMissRatio}>
@@ -63,19 +63,32 @@ const styles = StyleSheet.create({
   scoreDisplayLeft: {
     flexDirection: 'column',
     justifyContent: 'space-evenly',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     width: '50%',
+  },
+  scoreDisplayMatchAndMiss: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  scoreDisplayMatchAndMissText: {
+    width: '50%',
+  },
+  scoreDisplayMatchMissRatio: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
   },
   matchRatioProgressWrap: {
     width: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'pink',
+    // backgroundColor: 'pink',
     marginTop: 10,
   },
   progressOuter: {
-    width: '90%',
+    width: '100%',
     height: 20,
     borderColor: 'black',
     borderWidth: 1,

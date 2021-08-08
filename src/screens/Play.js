@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   main: {
     flexDirection: "column",
     height: "100%",
-    backgroundColor: "#999",
+    backgroundColor: "#aaa",
     justifyContent: "space-between",
   },
   footer: {

@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     justifyContent: 'space-around',
     paddingHorizontal: 10,
-    marginBottom: 5,
+    marginBottom: 3,
   },
   keyAccidentalsOpacity: {
     // backgroundColor: 'orange',
