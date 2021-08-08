@@ -8,7 +8,7 @@ https://reactnativecode.com/system-ui-isnt-responding/
 
 
 TODO NEXT
-    align score display left
+    Nan% 
     Display current mode
     repeat call & timeout
     newNoteMatchesToNextLevel

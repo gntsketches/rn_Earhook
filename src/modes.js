@@ -4,4 +4,9 @@ const modes = {
   chromatic: ['C', 'Cs', 'D', 'Ds', 'E', 'F', 'Fs', 'G', 'Gs', 'A', 'As', 'B', 'C8'],
 }
 
+export const modeTitles = {
+  major: 'Ionian Mode (Major Scale',
+  minor: 'Aolian Mode (Major Scale',
+}
+
 export default modes
