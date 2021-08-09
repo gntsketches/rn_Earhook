@@ -42,7 +42,6 @@ export class GlobalContextProvider extends React.Component {
     callCountLimit: 3,
     mode: 'major',
     scoring,
-    callerTimeout: null,
     // responseTime: '', // is that needed?
     // sameCallCount: 0,
     // sameCallLimit: 2,
@@ -76,11 +75,15 @@ export class GlobalContextProvider extends React.Component {
     if (!playing) {
       this.setState({
         playing: true,
+        // animationFrame: requestAnimationFrame(this.step), // is it necessary to store a reference? better to use a ref?
         startTime: Date.now(),
       });
+      // requestAnimationFrame(this.step) // is it necessary to store a reference? better to use a ref?
+      setTimeout(this.step, 25); // this rAF has no reference...
 
       this.sendCall();
     } else {
+      // cancelAnimationFrame(this.state.animationFrame) // is it actually necessary to cancelAnimationFrame?
       this.setState({
         playing: false,
         animationFrame: null,
@@ -108,6 +111,8 @@ export class GlobalContextProvider extends React.Component {
     }
 
     if (playing) {
+      // requestAnimationFrame(this.step); // this rAF has no reference...
+      setTimeout(this.step, 25); // this rAF has no reference...
     }
   }
 
@@ -120,10 +125,8 @@ export class GlobalContextProvider extends React.Component {
 
   sendCall = () => {
     // const { pickNewCallNote } = this.state
-    const { callWasMatched, maxWaitTime, callCount, callCountLimit, callerTimeout } = this.state
+    const { callWasMatched, maxWaitTime, callCount, callCountLimit } = this.state
     let { callNote } = this.state
-
-    clearTimeout(callerTimeout)
 
     if (callCount >= callCountLimit) {
       this.togglePlaying()
@@ -136,26 +139,21 @@ export class GlobalContextProvider extends React.Component {
     if (callWasMatched || callNote == null) {
       callNote = this.pickNote()
     }
-    
     const now = Date.now() 
     const nextCallTime = now + maxWaitTime
-
     this.setState({
       callTime: Date.now(),
       callNote,
       callWasMatched: false,
       nextCallTime,
       callCount: callCount+1,
-      callerTimeout: setTimeout(this.sendCall, maxWaitTime)
     })
 
     AudioModule.playPitch(callNote);
   }
 
   sendResponse = (responseNote) => {
-    const { callNote, callTime, mode, scoring, callWasMatched, callerTimeout } = this.state
-
-    clearTimeout(callerTimeout)
+    const { callNote, callTime, mode, scoring, callWasMatched } = this.state
 
     const now = Date.now() // console.log('now', now);
     const nextCallInterval = now - callTime // console.log('nextCallInterval', nextCallInterval)
@@ -183,15 +181,12 @@ export class GlobalContextProvider extends React.Component {
     }
     newScoring[mode].levelData[this.currentLevel-1] = newLevelData
 
-    const responseInterval = Date.now() - callTime
-
     this.setState({
       nextCallTime,
       pickNewCallNote,
       scoring: newScoring,
       callWasMatched: responseMatchedCall,
       callCount: 0,
-      callerTimeout: setTimeout(this.sendCall, responseInterval)
     }, this.checkForLevelAdvance)
   }
 
