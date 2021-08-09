@@ -33,7 +33,6 @@ export class GlobalContextProvider extends React.Component {
     playing: false, // started: false,
     animationFrame: null, // is a reference to animationFrame needed?
     startTime: '',
-    timestamp: '',
     callTime: '',
     callNote: null,
     nextCallTime: null,
@@ -100,9 +99,8 @@ export class GlobalContextProvider extends React.Component {
   step = (timestamp) => {
     // console.log('timestamp', timestamp);
     let { playing, nextCallTime, maxWaitTime } = this.state;
-    // this.setState({ timestamp: timestamp })
 
-    const now = Date.now()
+    const now = Date.now() // use timestamp?
     if (nextCallTime != null && now >= nextCallTime) {
       // console.log('sending call')
       this.sendCall();
@@ -132,10 +130,10 @@ export class GlobalContextProvider extends React.Component {
       this.togglePlaying()
       return
     }
-
     // if (pickNewCallNote) {
     //   callNote = this.pickNote()
     // }
+
     if (callWasMatched || callNote == null) {
       callNote = this.pickNote()
     }
@@ -173,6 +171,9 @@ export class GlobalContextProvider extends React.Component {
       responseMatchedCall = true
       // pickNewCallNote = true
       newLevelData.match += 1
+      if (responseNote === newLevelData.matchNote) {
+        newLevelData.nextLevelMatches += 1
+      }
     } else {
       newLevelData.miss += 1
     }
@@ -184,17 +185,16 @@ export class GlobalContextProvider extends React.Component {
       scoring: newScoring,
       callWasMatched: responseMatchedCall,
       callCount: 0,
-    // })
     }, this.checkForLevelAdvance)
-
   }
 
   checkForLevelAdvance() {
     const { scoring, mode } = this.state
-    const { match, miss } = this.currentLevelData
+    const { match, miss, nextLevelMatches } = this.currentLevelData
     const matchToMissRatio = match/miss
     // console.log('match/miss', matchToMissRatio);
     if (match >= 10 
+      && (nextLevelMatches >= 10)
       && (miss === 0 || matchToMissRatio >= 10)) {
         const newScoring = { ...scoring }
         newScoring[mode].level += 1

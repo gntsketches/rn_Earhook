@@ -29,9 +29,6 @@ const Play = (props) => {
       <Text>Flair</Text>
       {/*<Text>Timestamp: {timestamp}</Text>*/}
       <Piano />
-      {/*<ScrollView>*/}
-      {/*  <Piano1 />*/}
-      {/*</ScrollView>*/}
       <View style={styles.footer}>
         <Pressable style={styles.button} onPress={() => props.global.togglePlaying()}>
           <Text style={styles.text}>{startStopText}</Text>

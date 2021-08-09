@@ -5,6 +5,11 @@ import {
 } from 'react-native'
 import { withGlobalContext } from '../../GlobalContext';
 
+// Recall that this needed to be in a ScrollView to display properly:
+      {/*<ScrollView>*/}
+      {/*  <Piano1 />*/}
+      {/*</ScrollView>*/}
+
 class Piano extends React.Component {
   
   playPitch(note) {
