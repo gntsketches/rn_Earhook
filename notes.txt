@@ -5,11 +5,9 @@ https://eslint.org/docs/user-guide/configuring/
 https://reactnative.dev/docs/safeareaview
 https://reactnativecode.com/system-ui-isnt-responding/
 
-
+https://auth0.com/blog/four-types-of-leaks-in-your-javascript-code-and-how-to-get-rid-of-them/
 
 TODO NEXT
-    repeat call & timeout
-    newNoteMatchesToNextLevel
     
 
 

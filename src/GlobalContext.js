@@ -78,7 +78,8 @@ export class GlobalContextProvider extends React.Component {
         // animationFrame: requestAnimationFrame(this.step), // is it necessary to store a reference? better to use a ref?
         startTime: Date.now(),
       });
-      requestAnimationFrame(this.step) // is it necessary to store a reference? better to use a ref?
+      // requestAnimationFrame(this.step) // is it necessary to store a reference? better to use a ref?
+      setTimeout(this.step, 25); // this rAF has no reference...
 
       this.sendCall();
     } else {
@@ -110,7 +111,8 @@ export class GlobalContextProvider extends React.Component {
     }
 
     if (playing) {
-      requestAnimationFrame(this.step); // this rAF has no reference...
+      // requestAnimationFrame(this.step); // this rAF has no reference...
+      setTimeout(this.step, 25); // this rAF has no reference...
     }
   }
 
