@@ -10,7 +10,7 @@ class ScoreDisplay extends React.Component {
       scoring, mode, currentLevel, currentLevelData,
     } = this.props.global
 
-    const { match, miss } = currentLevelData
+    const { matchNote, match, miss, nextLevelMatches } = currentLevelData
 
     let matchMissRatio 
     let ratioProgressInner
@@ -23,7 +23,20 @@ class ScoreDisplay extends React.Component {
     } else {
       matchMissRatio = Math.round(match/miss * 100) / 100
       ratioProgressInner = matchMissRatio * 10
+      if (ratioProgressInner > 100) {
+        ratioProgressInner = 100
+      }
       ratioProgressInner = `${ratioProgressInner}%`
+    }
+
+    let nextLevelProgress
+    if (nextLevelMatches === 0) {
+      nextLevelProgress = 0
+    } else if (nextLevelMatches > 10) {
+      nextLevelProgress = '100%'
+    } else {
+      nextLevelProgressRatio = (nextLevelMatches/10) * 100
+      nextLevelProgress = `${nextLevelProgressRatio}%`
     }
 
 
@@ -46,7 +59,21 @@ class ScoreDisplay extends React.Component {
             </View>
           </View>
         </View>
-        <View><Text>Right</Text></View>
+
+        <View style={styles.scoreDisplayRight}>
+          <Text> </Text>
+          <View>
+            <Text>Match '{matchNote}': {nextLevelMatches}/10</Text>
+          </View>
+          <View style={styles.matchRatioProgressWrap}>
+            <View style={styles.progressOuter}>
+              <View style={[
+                styles.progressInner,
+                {width: nextLevelProgress}
+              ]}/>
+            </View>
+          </View>
+        </View>
       </View>
     )
   }
@@ -67,6 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'flex-start',
     width: '50%',
+    paddingRight: 5,
   },
   scoreDisplayMatchAndMiss: {
     flexDirection: 'row',
@@ -100,5 +128,12 @@ const styles = StyleSheet.create({
     // width: `50%`,
     // width: width,
     backgroundColor: 'green',
+  },
+  scoreDisplayRight: {
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+    alignItems: 'flex-start',
+    width: '50%',
+    paddingLeft: 5,
   },
 })
