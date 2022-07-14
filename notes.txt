@@ -1,3 +1,15 @@
+HOW TO START THIS:
+    https://reactnative.dev/docs/environment-setup
+    > React Native CLI Quickstart
+        > Android (Windows)
+        ... yr Razer is already configured
+        > In one terminal, "yarn react-native start"
+        > In another terminal, run react-native run-android"
+        ... that'll open an emulator, or install it on your phone if connected
+
+
+
+
 https://reactnative.dev/docs/native-modules-android
 https://developer.android.com/guide/topics/media/mediaplayer
 https://medium.com/@nabehide/how-to-make-the-piano-in-react-native-c8baba1d2917
