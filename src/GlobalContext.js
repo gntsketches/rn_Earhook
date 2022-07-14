@@ -139,6 +139,8 @@ export class GlobalContextProvider extends React.Component {
     if (callWasMatched || callNote == null) {
       callNote = this.pickNote()
     }
+    AudioModule.playPitch(callNote);
+
     const now = Date.now() 
     const nextCallTime = now + maxWaitTime
     this.setState({
@@ -148,8 +150,6 @@ export class GlobalContextProvider extends React.Component {
       nextCallTime,
       callCount: callCount+1,
     })
-
-    AudioModule.playPitch(callNote);
   }
 
   sendResponse = (responseNote) => {
